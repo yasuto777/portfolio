@@ -55,6 +55,10 @@ html,body {
     z-index: 3;
 }
 
+#applelogo img:hover{
+    filter: invert(100%);
+}
+
 .menubar #title{
     position: fixed;
     top: -11px;
