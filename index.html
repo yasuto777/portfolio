@@ -1,0 +1,284 @@
+<! DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Yasuto777</title>
+    <!-- 全てのa要素を新規タブで開く -->
+    <base target="_blank">
+
+    <!-- Load css file -->
+    <link rel="stylesheet" type="text/css" href="index.css">
+
+
+    <!-- Load .js -->
+    <!-- JQuery-->
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <!-- balloon -->
+    <script type="text/javascript" src="js/jquery.balloon.min.js"></script>
+    <!-- JQuery UI -->
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <!-- JQuery inview -->
+    <script type="text/javascript" src="js/jquery.inview.min.js"></script>
+
+</head>
+
+<body>
+
+    <!--loading screen-->
+    <script>
+        jQuery(window).load(function(){
+            setTimeout(function(){
+                jQuery('#loading').fadeOut();
+            },100);
+        });
+    </script>
+    <div id="loading">
+        <img src="./img/load_home.GIF"><span>Now Loading...</span>
+    </div>
+    
+    
+    
+    <!---------- Menu Bar ---------->
+    <div class="menubar">
+        <!--/div-->
+
+        <!--------- Apple logo ---------->
+        <div class="modal" id="applelogo">
+            <img src="img/apple.png">
+        </div>
+
+        <!-- ページタイトル -->
+        <p id="title">MyPortfolio</p>
+
+        <!---------- Clock --------->
+        <p id="clock"></p>
+        <script type="text/javascript">
+            nDay = new Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
+
+            function set2fig(num) {
+                // 桁数が1桁だったら先頭に0を加えて2桁に調整する
+                var ret;
+                if (num < 10) {
+                    ret = "0" + num;
+                } else {
+                    ret = num;
+                }
+                return ret;
+            }
+
+            function showClock1() {
+                var nowTime = new Date();
+                var nowHour = set2fig(nowTime.getHours());
+                var nowMin = set2fig(nowTime.getMinutes());
+                var nowSec = set2fig(nowTime.getSeconds());
+                var nowDay = nDay[nowTime.getDay()];
+                var msg = nowDay + " " + nowHour + ":" + nowMin; //書き出す書式への整形
+                document.getElementById("clock").innerHTML = msg;
+            }
+            setInterval('showClock1()', 1000); //Refresh per 1sec
+        </script>
+
+        <!-- 認証 -->
+        <div id="userinput">
+            <img src="img/test.png">
+        </div>
+        <script>
+            $("#userinput").click(function(){
+                var input = prompt("Ahead is the administrator page.\n Please enter your password.","");
+                //キャンセル時の処理
+                if(input == null) return false;
+                location.href = input + ".html";
+                
+            });
+        </script>
+        
+        
+        
+        <!-- サイドメニュー表示用のボタン領域 -->
+        <script>
+            $(function () {
+                //'#sidebtn'クリックでサイドバー領域をトグル
+                $("#sidebtn").click(function () {
+                    $("#sidebar_area").toggle('slide', {
+                        direction: 'right'
+                    }, 250);
+                    $(document).on('click',function(evt){
+                        if(!$(evt.target).closest('.sidebar').length){
+                            $("#sidebar_area").hide('slide',{direction:'right'},250);
+                        }
+                    });
+
+                });
+            });
+            
+        </script>
+        <div class="sidebar" id="sidebtn"><img src="img/burger.png"></div>
+
+    </div>
+
+
+    <!-- SideBar -->
+    <div class="sidebar" id="sidebar_area">
+        
+        <div class="sidebar_tab">
+            <div class="tab" id="tab1">更新履歴</div>
+            <div class="tab" id="tab2" style="background-color: rgba(200,200,200,0.9)">何か作る</div>
+        </div>
+        
+        <script>
+            //タブクリックした時の色変化
+            $(function(){
+                $('.tab').on('click',function(){
+                    //クリックした方のタブの処理
+                    $(this).css("background-color","");
+
+                    //クリックされてない方のタブの処理
+                 $('.tab').not(this).css("background-color","rgba(200,200,200,0.9)");
+                });
+            });
+            
+            /* 一応タブ完成　書き方汚い */
+            //tab1
+            $(function(){
+                $('#tab1').on('click',function(){
+                    $('#tab1_txt').css("display","block");
+                    $('#tab2_txt').css("display","none");
+                });
+            });
+            //tab2
+            $(function(){
+                $('#tab2').on('click',function(){
+                    $('#tab2_txt').css("display","block");
+                    $('#tab1_txt').css("display","none");
+                });
+            });
+            
+            
+        </script>
+        
+        <div class="sidebar_txt_area">
+        <!-- Tab1 text -->
+        <div id="tab1_txt">
+        <!-- ここに追加要素や更新点を書いていく -->
+            2015/12/12(23:57)
+            <h3>サイドバーにタブ実装</h3><br>
+            この部分のソースが汚い…<br>
+            もうちょいjs力付いたら綺麗にする。<hr>
+        2015/12/12(16:18)
+        <h3>バーガーボタンの画像追加</h3><br>
+        やっとバーガーボタン作りました。<hr>
+        2015/12/12(13:25)<br>
+        <h3>モーダルウィンドウのテキストにアニメーション追加</h3><br>
+        モーダルウィンドウ内のテキストをブラインドで表示<br><hr>
+        2015/12/11(20:46)<br>
+            <h3>モーダルウィンドウの雛形完成！</h3><br>
+        appleマークをクリックでモーダルウィンドウ表示<br>
+        モーダルウィンドウ領域外をクリックで閉じる<br><hr>
+            2015/12/11(18:17)<br>
+        <h3>サイドバーの雛形完成！</h3><br>
+        バーガーボタンを押すとサイドバー表示<br>
+            サイドバー領域以外をクリックで閉じる
+            <div><br></div>
+        </div>
+        
+        <!-- Tab2 text -->
+        <div id="tab2_txt" style="display:none">
+            tab2 text
+        </div>
+        </div>
+    </div>
+
+
+    <!-------- Dock ------------>
+    <div class="Dock"></div>
+    <!-- Dock Icons -->
+    <ul class="icons">
+        <li>
+            <a href="mailto:s.y.water.77@gamil.com" title="GMail"><img src="img/dock-gmail.png"></div>
+            </a>
+        </li>
+        <li>
+            <a href="https://twitter.com/zomqyqzvto" title="Twitter"><img src="img/dock-twitter.png"></a>
+        </li>
+        <li>
+            <a href="https://github.com/yasuto777" title="Github"><img src="img/dock-github.png"></a>
+        </li>
+        <li>
+            <a href="http://qiita.com/yasuto777" title="Qiita">
+                <image src="img/dock-qiita.png">
+            </a>
+        </li>
+        <li>
+            <a href=http://yasuto777.hatenablog.com/ title="Hatena Blog">
+                <image src="img/dock-hatena.png">
+            </a>
+        </li>
+        <li>
+            <a href="http://yasuto777.strikingly.com/" title="Portfolio">
+                <image src="img/dock-portfolio.png">
+            </a>
+        </li>
+
+        <script>
+            $(".icons a").balloon({
+                position: "top",
+                offsetY: 100,
+                showDuration: 10,
+                hideDuration: 0,
+                css: { //Balloon design
+                    backgroundColor: 'rgba(250,250,250,0.9)'
+                }
+            });
+        </script>
+    </ul>
+
+
+<!-- モーダルウィンドウ本体 -->
+<div class="modal" id="modal_window">
+    <!-- モーダルウィンドウ内のテキスト -->
+    <h1>Thank you for your access!!</h1>
+    <div class="modal" id="modal_text">
+        <span class="description">Development environment :</span> MacBook (OSX El Capitan v10.11.1)<br>
+        <span class="description">Editor :</span> Brackets(1.5.0-16538)<br>
+            <span class="description">Using Language :</span> HTML5 &amp; CSS3 &amp; javascript<br>
+        <spna class="description">Using library :</spna><br>JQuery2.1.4&nbsp;&nbsp;&nbsp;JQuery UI<br>
+        <span class="description">Using Plugin : </span><br>JQuery.ballon&nbsp;&nbsp;&nbsp;JQuery.inview<br>
+                <span class="description">Author :</span> Yasuto Souma<br>
+        </div>
+    <!-- My symbol img -->
+    <div class="modal" id="modal_symbol"><br><img src="img/horse64.png"></div>
+</div>
+
+
+    <!-- モーダル用オーバーレイ -->
+<div id="modal_overlay"></div>
+<script>
+    $(function(){
+        //モーダルウィンドウ非表示
+        $("#modal_window").css("display","none");
+        $("#modal_overlay").css("display","none");
+        $("#modal_text").css("display","none");//test
+        $("#applelogo").click(function(){
+            //オーバーレイ表示
+            $("#modal_overlay").toggle('fade',250);
+            $("#modal_window").toggle('fade',250);
+            //モーダルテキストアニメーション表示
+            $('#modal_text').show('blind',2000);
+            
+            //モーダルウィンドウ領域外クリックで閉じる
+            $(document).on('click',function(evt){
+                if(!$(evt.target).closest('.modal').length){               $("#modal_overlay,#modal_window,#modal_text").hide('fade',250);
+                }
+            });
+        
+        });
+    }
+     );
+    
+</script>
+
+
+</body>
+
+</html>
